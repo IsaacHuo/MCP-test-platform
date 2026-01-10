@@ -1,33 +1,24 @@
-import json 
-import requests
-import os
+"""
+MPMA Utility Functions
+通用工具函数
+"""
 
-def openai_query(query,instruction):
-    Baseurl = ""
-    Skey = "xxxxxxxxx" # your API key
-    payload = json.dumps({
-        "model": "gpt-4o",
-        "messages": [
-            {
-                "role": "system",
-                "content": f"{instruction}"
-            },
-            {
-                "role": "user",
-                "content": f"{query}"
-            }
-        ]
-    })
-    url = Baseurl + "/v1/chat/completions"
-    headers = {
-        'Accept': 'application/json',
-        'Authorization': f'Bearer {Skey}',
-        'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
-        'Content-Type': 'application/json'
-    }
+# 注意：API 调用相关功能已迁移到 llm_client.py
+# 此文件保留用于其他工具函数
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+from llm_client import query as openai_query  # 向后兼容的别名
 
-    data = response.json()
-    option = data['choices'][0]['message']['content']
-    return option
+
+def format_description(description: str, prefix: str = "") -> str:
+    """格式化工具描述
+    
+    Args:
+        description: 原始描述
+        prefix: 可选前缀
+    
+    Returns:
+        格式化后的描述
+    """
+    if prefix:
+        return f"{prefix} {description}"
+    return description

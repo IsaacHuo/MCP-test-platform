@@ -40,9 +40,9 @@ The Model Context Protocol (MCP) enables LLM agents to interact with external se
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- Conda (recommended) or pip
-- API keys for OpenAI/compatible LLM services
+- Python 3.9 or higher
+- [uv](https://docs.astral.sh/uv/) package manager
+- DeepSeek API key
 
 ### Environment Setup
 
@@ -52,30 +52,28 @@ The Model Context Protocol (MCP) enables LLM agents to interact with external se
    cd MPMA
    ```
 
-2. **Create the Conda environment**
+2. **Install dependencies with uv**
    ```bash
-   conda env create -f environment.yml
-   conda activate mpma
+   uv sync
    ```
 
-3. **Configure API Keys**
+3. **Configure API Key**
    
-   Edit the API configuration in the following files:
-   - `generic_optimize.py` (line 55)
-   - `metric.py` (line 31 and line 97)
-   - `optimize_with_prompt.py` (line 44)
-   - `utils.py` (line 7)
+   Set your DeepSeek API key as an environment variable:
+   ```bash
+   export DEEPSEEK_API_KEY="your-api-key-here"
+   ```
    
-   Replace `"xxxxxxx"` or `"your API"` with your actual API key:
+   Or edit `config.py` directly:
    ```python
-   Skey = "your-api-key-here"
+   DEEPSEEK_API_KEY = "your-api-key-here"
    ```
 
-### Alternative: Manual Installation
+### Alternative: Using pip
 
-If you prefer pip over Conda:
+If you prefer pip over uv:
 ```bash
-pip install -r requirements.txt  # Generate from environment.yml if needed
+pip install pandas requests openai transformers datasets tqdm torch
 ```
 
 ## 🎯 Quick Start
